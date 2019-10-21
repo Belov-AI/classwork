@@ -6,16 +6,20 @@ namespace Chess
     {
         static void Main()
         {
-            Console.WriteLine("Введите позицию белой фигуры");
+            Console.WriteLine("Введите позицию белого ферзя");
             var posWhite = Console.ReadLine().ToLower();
-            //int x, y;
-            //DecodePosition(posWhite, out x, out y);
-            //Console.WriteLine("Вертикаль: {0}, горизонталь {1}", x, y);
 
-            Console.WriteLine("Введите ход белой фигуры");
+            Console.WriteLine("Введите позицию черного короля");
+            var posBlack = Console.ReadLine().ToLower();
+
+            Console.WriteLine("Введите ход белого ферзя");
             var moveWhite = Console.ReadLine().ToLower();
 
-            Console.WriteLine(IsQueenCanMove(posWhite, moveWhite));
+            Console.WriteLine("Возможность хода: {0}",
+                IsQueenCanMove(posWhite, moveWhite) &&
+                !IsKingCanMove(posBlack, moveWhite));
+            
+            
 
             Console.ReadKey();
         }
@@ -34,10 +38,21 @@ namespace Chess
             DecodePosition(start, out startColumn, out startRow);
             DecodePosition(end, out endColumn, out endRow);
 
-            return startColumn == endColumn || startRow == endRow ||
-                Math.Abs(startColumn - endColumn) == Math.Abs(startRow - endRow);
+            return (startColumn == endColumn || startRow == endRow ||
+                Math.Abs(startColumn - endColumn) == Math.Abs(startRow - endRow)) 
+                && start != end;
         }
 
+        static bool IsKingCanMove(string start, string end)
+        {
+            int startColumn, startRow, endColumn, endRow;
+
+            DecodePosition(start, out startColumn, out startRow);
+            DecodePosition(end, out endColumn, out endRow);
+
+            return Math.Abs(startRow - endRow) <= 1 &&
+                Math.Abs(startColumn - endColumn) <= 1 && start != end;
+        }
         
     }
 }
