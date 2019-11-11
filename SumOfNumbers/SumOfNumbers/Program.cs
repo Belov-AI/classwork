@@ -13,16 +13,28 @@ namespace SumOfNumbers
             Console.WriteLine("Введите максимальное значение суммы");
             var upperBorder = int.Parse(Console.ReadLine());
 
-            while (sum < upperBorder)
+            do
             {
                 Console.Write("Введите целое число: ");
                 var number = int.Parse(Console.ReadLine());
                 count++;
                 sum += number;
-            }
+            } while (sum < upperBorder);
 
-            Console.WriteLine("Введено {0} чисел. Сумма равна {1}", count, sum);
+            Console.WriteLine("Введено {0} {2}. Сумма равна {1}", 
+                count, sum, GetWord(count));
             Console.ReadKey();
+        }
+
+        static string GetWord(int n)
+        {
+            var r = n % 10;
+            if (n % 100 == 11 || r > 4)
+                return "чисел";
+            else if (r == 1)
+                return "число";
+            else
+                return "числа";
         }
     }
 }
