@@ -45,27 +45,58 @@ namespace Fractals
 			var g = Graphics.FromImage(image);
 			g.FillRectangle(Brushes.Black, 0, 0, image.Width, image.Height);
 
-			/*
-			Начните с точки (1, 0)
-			На каждой итерации:
+            var random = new Random();
 
-			1. Выберите случайно одно из следующих преобразований и примените его к текущей точке:
+            double x = 1, y = 0;
+            SetPixel(image, x, y);
 
-				Преобразование 1. (поворот на 45° и сжатие в sqrt(2) раз):
-				x' = (x · cos(45°) - y · sin(45°)) / sqrt(2)
-				y' = (x · sin(45°) + y · cos(45°)) / sqrt(2)
+            for (var i = 0; i < iterationsCount; i++)
+            {
+                double x1, y1;
+                double angle;
+                double shift;
 
-				Преобразование 2. (поворот на 135°, сжатие в sqrt(2) раз, сдвиг по X на единицу):
-				x' = (x · cos(135°) - y · sin(135°)) / sqrt(2) + 1
-				y' = (x · sin(135°) + y · cos(135°)) / sqrt(2)
-		
-			2. Нарисуйте текущую точку методом SetPixel.
-			*/
+                if(random.Next(2) == 0)
+                {
+                    angle = 45;
+                    shift = 0;
+                }
+                else
+                {
+                    angle = 135;
+                    shift = 1;
+                }
+
+                x1 = GetX(x, y, angle, shift);
+                y1 = GetY(x, y, angle);
+                x = x1;
+                y = y1;
+
+                SetPixel(image, x, y);
+            }
+
 
 			return image;
 		}
 
-		static void SetPixel(Bitmap image, double x, double y)
+        static double GetX(double x, double y, double angle, double shift)
+        {
+            angle = Deg2Rad(angle);
+            return (x *Math.Cos(angle) - y * Math.Sin(angle)) / Math.Sqrt(2) + shift;
+        }
+
+        static double GetY(double x, double y, double angle) 
+        {
+            angle = Deg2Rad(angle);
+            return (x * Math.Cos(angle) + y * Math.Sin(angle)) / Math.Sqrt(2);
+        }
+
+        static double Deg2Rad(double angle)
+        {
+            return Math.PI * angle / 180;
+        }
+
+        static void SetPixel(Bitmap image, double x, double y)
 		{
 			var xx = Scale(x, image.Width);
 			var yy = Scale(y, image.Height);
