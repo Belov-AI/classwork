@@ -7,43 +7,24 @@ namespace WebService
 
         static void Main()
         {
-            var human = new User();
-            human.Login = "Mike";
-            human.Password = "123456";
-            //human.SetPassword("123456");
+            Console.WriteLine(User.LogFileName);
+            
+            var human = new User("Mike", "123456");
 
             human.PrintInfo();
-
+            
             human.Password = "abc";
-            //human.SetPassword("abc");
-
             human.PrintInfo();
-
-            //Service.Users[0] = human;
-            //Service.NumberOfUsers++;
-
             Service.AddUser(human);
 
-            //Service.Users[1] = new User() {
-            //    Login = "Kate", Password = "qwerty" };
-            //Service.NumberOfUsers++;
+            Service.AddUser(new User("Kate"));
 
-            Service.AddUser(new User()
-            {
-                Login = "Kate",
-                Password = "qwerty"
-            });
-
-            Service.AddUser(new User()
-            {
-                Login = "Nick",
-                Password = "password"
-            });
+            var smbd = new User();
+            Service.AddUser(smbd);
 
             Console.WriteLine();
             for (var i = 0; i < Service.NumberOfUsers; i++)
                 Service.Users[i].PrintInfo();
-
 
             Console.ReadKey();
         }

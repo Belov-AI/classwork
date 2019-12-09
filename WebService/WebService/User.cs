@@ -4,9 +4,13 @@ namespace WebService
 {
     public class User
     {
-        public string Login;
+        static public readonly string LogFileName;
 
+        private int userID;
         private string password;
+
+        public string Login;
+       
         public string Password
         {
             get
@@ -24,23 +28,34 @@ namespace WebService
             }
         }
 
-        private int userID;
+        public User(string userLogin, string userPassword)
+        {
+            Login = userLogin;
+            Password = userPassword;
+            Console.WriteLine($"{DateTime.Now} - пользователь {Login} создан");
+        }
 
+        public User(string userLogin) : this(userLogin, "qwerty") { }
+
+        public User() : this("Anonymous") { }
+
+        static User()
+        {
+            LogFileName = "log_" 
+                + DateTime.Now.ToShortDateString().Replace('.','-') 
+                + ".txt";
+        }
+
+        ~User()
+        {
+            Console.WriteLine($"{DateTime.Now} - пользователь {Login} удален");
+        }
 
         public void PrintInfo()
         {
             Console.WriteLine($"Пользователь {Login}. Пароль {Password}");
-            //Console.WriteLine("Пользователь {0}. Пароль {1}", Login, Password);
         }
-
-        //public void SetPassword(string newPassword)
-        //{
-        //    if (newPassword.Length > 5)
-        //        Password = newPassword;
-        //    else
-        //        Console.WriteLine(
-        //            "Длина пароля должа быть не менее 6 знаков");
-        //}
+  
     }
 
     public static class Service
