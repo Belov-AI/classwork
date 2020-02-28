@@ -52,6 +52,13 @@ namespace GeometricLibrary
             Console.WriteLine($"Длина стороны AC = {tr.AC.Length}");
             Console.WriteLine($"Длина стороны BC = {tr.BC.Length}");
             Console.WriteLine($"Длина стороны AB = {tr.AB.Length:F3}");
+            Console.WriteLine($"Площадь треугольника = {tr.Area}");
+
+            var p = new Point(3, 2);
+            p.PrintInfo();
+            p.Rotate(new Point(1, 1), 30);
+            Console.WriteLine("После поворота на 30°:");
+            p.PrintInfo();
 
             Console.ReadKey();
         }

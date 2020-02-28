@@ -30,7 +30,21 @@ namespace GeometricLibrary
 
         public override string ToString()
         {
-            return $"({X}; {Y})";
+            return $"({X:F3}; {Y:F3})";
+        }
+
+        public void Rotate(Point center, double angleInDegrees)
+        {
+            var angleInRadians = angleInDegrees * Math.PI / 180;
+
+            var xNew = (X - center.X) * Math.Cos(angleInRadians) -
+                (Y - center.Y) * Math.Sin(angleInRadians) + center.X;
+
+            var yNew = (X - center.X) * Math.Sin(angleInRadians) +
+                (Y - center.Y) * Math.Cos(angleInRadians) + center.X;
+
+            X = xNew;
+            Y = yNew;
         }
 
     }
@@ -64,6 +78,12 @@ namespace GeometricLibrary
         {
             return p.IsInsideSegment(this);
         }
+
+        public void Rotate(Point center, double angleInDegrees)
+        {
+            A.Rotate(center, angleInDegrees);
+            B.Rotate(center, angleInDegrees);
+        }
     }
 
     public class Triangle
@@ -87,6 +107,19 @@ namespace GeometricLibrary
             get { return new Segment(B, C); }
         }
 
+        public double Area
+        {
+            get
+            {
+                var a = AB.Length;
+                var b = BC.Length;
+                var c = AC.Length;
+
+                var p = (a + b + c) / 2;
+                return Math.Sqrt(p * (p - a) * (p - b) * (p - c));
+            }
+        }
+
         public Triangle(Point a, Point b, Point c)
         {
             A = a;
@@ -97,6 +130,13 @@ namespace GeometricLibrary
         public void PrintInfo()
         {
             Console.WriteLine($"Треугольник с вершинами в точках {A}, {B} и {C}");
+        }
+
+        public void Rotate(Point center, double angleInDegrees)
+        {
+            A.Rotate(center, angleInDegrees);
+            B.Rotate(center, angleInDegrees);
+            C.Rotate(center, angleInDegrees);
         }
     }
 
