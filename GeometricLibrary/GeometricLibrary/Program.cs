@@ -60,6 +60,8 @@ namespace GeometricLibrary
             Console.WriteLine("После поворота на 30°:");
             p.PrintInfo();
 
+            Console.BackgroundColor = ConsoleColor.Red;
+
             Console.ReadKey();
         }
     }
