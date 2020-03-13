@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GeometricLibrary
 {
-    public class Point
+    public class Point : ICloneable
     {
         public double X;
         public double Y;
@@ -47,9 +47,13 @@ namespace GeometricLibrary
             Y = yNew;
         }
 
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 
-    public class Segment
+    public class Segment : ICloneable 
     {
         public Point A;
         public Point B;
@@ -84,9 +88,14 @@ namespace GeometricLibrary
             A.Rotate(center, angleInDegrees);
             B.Rotate(center, angleInDegrees);
         }
+
+        public object Clone()
+        {
+            return new Segment(A.Clone() as Point, B.Clone() as Point);
+        }
     }
 
-    public class Triangle
+    public class Triangle : ICloneable
     {
         public Point A;
         public Point B;
@@ -138,6 +147,12 @@ namespace GeometricLibrary
             B.Rotate(center, angleInDegrees);
             C.Rotate(center, angleInDegrees);
         }
+
+        public object Clone()
+        {
+            return new Triangle(A.Clone() as Point, B.Clone() as Point,
+                C.Clone() as Point);
+        }
     }
 
     public static class Geometry
@@ -156,9 +171,9 @@ namespace GeometricLibrary
         {
             var result = new Triangle(a, b, c);
 
-            if (a.IsInsideSegment(result.BC) ||
-                b.IsInsideSegment(result.AC) ||
-                c.IsInsideSegment(result.AB))
+            if (result.AB.Length >= result.BC.Length + result.AC.Length ||
+                result.BC.Length >= result.AB.Length + result.AC.Length ||
+                result.AC.Length >= result.AB.Length + result.BC.Length) 
                 throw new ArgumentException();
             else
                 return result;
