@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,7 +54,7 @@ namespace GeometricLibrary
         }
     }
 
-    public class Segment : ICloneable 
+    public class Segment : ICloneable, IEnumerable 
     {
         public Point A;
         public Point B;
@@ -93,9 +94,52 @@ namespace GeometricLibrary
         {
             return new Segment(A.Clone() as Point, B.Clone() as Point);
         }
+
+        public IEnumerator GetEnumerator()
+        {
+            return new SegmentEnumerator(this);
+        }
     }
 
-    public class Triangle : ICloneable
+    class SegmentEnumerator : IEnumerator
+    {
+        private Point current;
+        private Segment segment;
+        public object Current
+        {
+            get
+            {
+                return current;
+            }
+        }
+
+        public SegmentEnumerator(Segment s)
+        {
+            segment = s;
+            current = null;
+        }
+
+        public bool MoveNext()
+        {
+            var result = true;
+
+            if (current == segment.B)
+                result = false;
+            else if (current == null)
+                current = segment.A;
+            else
+                current = segment.B;
+
+            return result;
+        }
+
+        public void Reset()
+        {
+            current = null;
+        }
+    }
+
+    public class Triangle : ICloneable, IEnumerable
     {
         public Point A;
         public Point B;
@@ -152,6 +196,13 @@ namespace GeometricLibrary
         {
             return new Triangle(A.Clone() as Point, B.Clone() as Point,
                 C.Clone() as Point);
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            yield return this.A;
+            yield return this.B;
+            yield return this.C;
         }
     }
 

@@ -51,9 +51,9 @@ namespace Forms
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (form == null)
+            if (form == null || form.IsDisposed)
             {
-                form = new Form2();
+                form = new Form2(this);
                 ShowForm2();
             }
             else if (button3.Text == "Скрыть вторую форму")
@@ -73,7 +73,11 @@ namespace Forms
 
         private void button4_Click(object sender, EventArgs e)
         {
-            (new Form3()).ShowDialog();
+            var dialog = new Form3();
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+                this.Text = (dialog.Controls["textBox1"] as TextBox).Text;
+           
         }
     }
 }

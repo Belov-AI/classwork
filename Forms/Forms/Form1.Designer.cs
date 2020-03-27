@@ -71,6 +71,7 @@
             // 
             // button3
             // 
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button3.Location = new System.Drawing.Point(49, 184);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(111, 47);
@@ -81,11 +82,12 @@
             // 
             // button4
             // 
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button4.Location = new System.Drawing.Point(199, 184);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(111, 47);
             this.button4.TabIndex = 4;
-            this.button4.Text = "Открыть диалог";
+            this.button4.Text = "Сменить заголовок";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 

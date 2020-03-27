@@ -119,7 +119,7 @@ namespace EuclideUnitTests
         [TestMethod]
         public void SegmentCloneTestMethod()
         {
-            var s = new Segment(new Point(1, 1), new Point(-2, 3));
+            var s = GetTestSegment();
             var sClone = s.Clone() as Segment;
 
             Assert.AreEqual(s.A.X, sClone.A.X);
@@ -129,6 +129,70 @@ namespace EuclideUnitTests
             Assert.AreNotSame(s.A, sClone.A);
             Assert.AreNotSame(s.B, sClone.B);
             Assert.AreNotSame(s, sClone);
+        }
+
+        [TestMethod]
+        public void SegmentEnumerationTestMethod()
+        {
+            var s = GetTestSegment();
+
+            for(var i = 0; i < 2; i++)
+            {
+                var counter = 0;
+
+                foreach (var p in s)
+                    switch (counter++)
+                    {
+                        case 0:
+                            Assert.AreSame(s.A, p);
+                            break;
+                        case 1:
+                            Assert.AreSame(s.B, p);
+                            break;
+                        default:
+                            throw new Exception("Слишком много точек");
+                    }
+            }                    
+        }
+
+        private Segment GetTestSegment()
+        {
+            return new Segment(new Point(1, 1), new Point(-2, 3));
+        }
+    }
+
+    [TestClass]
+    public class TriangleTests
+    {
+        [TestMethod]
+        public void TriangleIteratorTestMethod()
+        {
+            Triangle t = new Triangle(
+                new Point(0, 0),
+                new Point(1, 0),
+                new Point(0, 1));
+
+            for(var i = 0; i < 2; i++)
+            {
+                var counter = 0;
+
+                foreach(var p in t)
+                    switch (counter++)
+                    {
+                        case 0:
+                            Assert.AreSame(t.A, p);
+                            break;
+                        case 1:
+                            Assert.AreSame(t.B, p);
+                            break;
+                        case 2:
+                            Assert.AreSame(t.C, p);
+                            break;
+                        default:
+                            throw new Exception("Стишком много вершин");
+                    }
+            }
+                
         }
     }
 
@@ -146,4 +210,5 @@ namespace EuclideUnitTests
                 );
         }
     }
+
 }
