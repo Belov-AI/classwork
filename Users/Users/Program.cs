@@ -12,10 +12,8 @@ namespace Users
         {
             var user = new User();
             user.Login = "John";
-            //user.PrintInfo();
 
             var regUser = new RegisteredUser("Karl", "qwerty", "karl@gmail.com");
-            //regUser.PrintInfo();
 
             var admin = new Admin()
             {
@@ -25,10 +23,6 @@ namespace Users
                 Level = 3
             };
 
-            //admin.PrintInfo();
-            //user = admin;
-            //user.PrintInfo();
-
             VIPUser vip = new VIPUser()
             {
                 Login = "George",
@@ -36,44 +30,54 @@ namespace Users
                 Email = "vip@gmail.com",
                 CardNumber = 1234567890
             };
-            //vip.PrintInfo();
-            //user = vip;
-            //user.PrintInfo();
 
-            //if (user is RegisterdUser)
-            //{
-            //    regUser = (RegisterdUser)user;
-            //    regUser.PrintInfo();
-            //}
-            //else
-            //    Console.WriteLine("Не удалось преобразовать тип");
+            {
+                //vip.PrintInfo();
+                //user = vip;
+                //user.PrintInfo();
 
-            //admin = user as Admin;
-            //if (admin != null)
-            //    admin.PrintInfo();
-            //else
-            //    Console.WriteLine("Не удалось преобразовать тип");
+                //if (user is RegisterdUser)
+                //{
+                //    regUser = (RegisterdUser)user;
+                //    regUser.PrintInfo();
+                //}
+                //else
+                //    Console.WriteLine("Не удалось преобразовать тип");
+
+                //admin = user as Admin;
+                //if (admin != null)
+                //    admin.PrintInfo();
+                //else
+                //    Console.WriteLine("Не удалось преобразовать тип");
 
 
-            User[] users = new[] { user, admin, regUser, vip };
+                //User[] users = new[] { user, admin, regUser, vip };
 
-            Array.Sort(users);
-            Array.Reverse(users);
+                //Array.Sort(users);
+                //Array.Reverse(users);
 
-            PrintUsers(users);
+                //PrintUsers(users);
 
-            RegisteredUser[] regUsers = new[] { admin, regUser, vip };
-            PrintRegUsers(regUsers);
-            Array.Sort(regUsers);
-            PrintRegUsers(regUsers);
+                //RegisteredUser[] regUsers = new[] { admin, regUser, vip };
+                //PrintRegUsers(regUsers);
+                //Array.Sort(regUsers);
+                //PrintRegUsers(regUsers);
 
-            var comparerByPassword = new RegUsersComparerByPassword();
-            Array.Sort(regUsers, comparerByPassword);
-            PrintRegUsers(regUsers);
+                //var comparerByPassword = new RegUsersComparerByPassword();
+                //Array.Sort(regUsers, comparerByPassword);
+                //PrintRegUsers(regUsers);
 
-            Console.WriteLine();
+                //Console.WriteLine();
+            }
 
             var service = new Service(user, admin, vip, regUser);
+
+            service.Users.Add(new User("Kate"));
+            service.Users.Insert(1, new User("Lilibeth"));
+            service.Users.Remove(admin);
+
+            service.Users.Sort();
+            service.Users.Reverse();
 
             foreach (var u in service)
                 Console.WriteLine(u);
