@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Controls
 {
     public partial class Form1 : Form
     {
+        int pictureNumber = 7;
         public Form1()
         {
             InitializeComponent();
@@ -76,6 +78,85 @@ namespace Controls
                 fontfamilyName,
                 label1.Font.Size,
                 label1.Font.Style);
+        }
+
+        private void ChangePicture(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+
+            if (button.Text == "<<")
+                pictureNumber--;
+            else
+                pictureNumber++;
+
+            if (pictureNumber == 8)
+                pictureNumber = 1;
+            else if (pictureNumber == 0)
+                pictureNumber = 7;
+
+            pictureBox1.Image = Properties.Resources.ResourceManager.GetObject(
+                "pic" + pictureNumber.ToString()) as Image;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (button4.Text == "Пуск")
+            {
+                timer1.Enabled = true;
+                button4.Text = "Стоп";
+            }
+                
+            else
+            {
+                timer1.Enabled = false;
+                button4.Text = "Пуск";
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if(progressBar1.Value < progressBar1.Maximum)
+            {
+                progressBar1.PerformStep();
+
+                if (progressBar1.Value % 20 == 0)
+                    ChangePicture(button3, new EventArgs());
+            }
+            else
+            {
+                timer1.Enabled = false;
+                progressBar1.Value = 0;
+                button4.Text = "Пуск";
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "Простой текст|*.txt|Форматированный текст|*.rtf";
+
+            var result = openFileDialog1.ShowDialog();
+
+            if (result == DialogResult.OK)
+                if (openFileDialog1.FilterIndex == 1)
+                    richTextBox1.Text = File.ReadAllText(
+                        openFileDialog1.FileName, Encoding.Default);
+                else
+                    richTextBox1.LoadFile(openFileDialog1.FileName);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "JPEG|*.jpg|PNG|*.png|TIFF|*.tif";
+
+            var result = openFileDialog1.ShowDialog();
+
+            if (result == DialogResult.OK)
+                pictureBox1.Image = Image.FromFile(openFileDialog1.FileName);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
