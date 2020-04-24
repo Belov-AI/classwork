@@ -158,5 +158,21 @@ namespace Controls
         {
             Close();
         }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                label1.Text = textBox1.Text;
+                textBox1.Text = "";
+            }
+                
+        }
+
+        private void richTextBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Tab)
+                e.IsInputKey = true;
+        }
     }
 }
