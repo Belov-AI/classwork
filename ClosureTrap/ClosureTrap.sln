@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClosureTrap", "ClosureTrap\ClosureTrap.csproj", "{3DAF8413-3683-41CA-A012-34260D178D21}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3DAF8413-3683-41CA-A012-34260D178D21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DAF8413-3683-41CA-A012-34260D178D21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DAF8413-3683-41CA-A012-34260D178D21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DAF8413-3683-41CA-A012-34260D178D21}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4DF031F1-CFAB-49B3-B2BA-1BFA9396AAD9}
+	EndGlobalSection
+EndGlobal
