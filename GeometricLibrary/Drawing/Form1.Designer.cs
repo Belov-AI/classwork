@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Name = "Form1";
             this.Text = "Поворот треугольника";
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.ResumeLayout(false);
 
         }

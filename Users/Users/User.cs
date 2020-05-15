@@ -86,16 +86,26 @@ namespace Users
 
     public class Service : IEnumerable
     {
-        public List<User> Users;
+        private List<User> users;
 
         public Service(params User[] u)
         {
-            Users = new List<User>(u);
+            users = new List<User>(u);
         }
 
         public IEnumerator GetEnumerator()
         {
-            return Users.GetEnumerator();
+            return users.GetEnumerator();
+        }
+
+        public void AddUser(User user)
+        {
+            users.Add(user);
+        }
+
+        public void RemoveUser(User user)
+        {
+            users.Remove(user);
         }
     }
 }

@@ -11,10 +11,16 @@ namespace Delegates
     {
         static void Main(string[] args)
         {
-            //UnaryOperation f = Math.Sin;
+            UnaryOperation f = Math.Sin;
             //Console.WriteLine(f(1.5));
             //f = Square;
             //Console.WriteLine(Square(1.5));
+
+
+
+            f += Math.Cos;
+            f += Square;
+            Console.WriteLine(f(2));
 
             var table = new Table() { RowNumber = 10, Start = 0, Step = 0.25 };
 

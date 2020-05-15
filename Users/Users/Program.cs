@@ -31,53 +31,18 @@ namespace Users
                 CardNumber = 1234567890
             };
 
-            {
-                //vip.PrintInfo();
-                //user = vip;
-                //user.PrintInfo();
-
-                //if (user is RegisterdUser)
-                //{
-                //    regUser = (RegisterdUser)user;
-                //    regUser.PrintInfo();
-                //}
-                //else
-                //    Console.WriteLine("Не удалось преобразовать тип");
-
-                //admin = user as Admin;
-                //if (admin != null)
-                //    admin.PrintInfo();
-                //else
-                //    Console.WriteLine("Не удалось преобразовать тип");
-
-
-                //User[] users = new[] { user, admin, regUser, vip };
-
-                //Array.Sort(users);
-                //Array.Reverse(users);
-
-                //PrintUsers(users);
-
-                //RegisteredUser[] regUsers = new[] { admin, regUser, vip };
-                //PrintRegUsers(regUsers);
-                //Array.Sort(regUsers);
-                //PrintRegUsers(regUsers);
-
-                //var comparerByPassword = new RegUsersComparerByPassword();
-                //Array.Sort(regUsers, comparerByPassword);
-                //PrintRegUsers(regUsers);
-
-                //Console.WriteLine();
-            }
-
             var service = new Service(user, admin, vip, regUser);
 
-            service.Users.Add(new User("Kate"));
-            service.Users.Insert(1, new User("Lilibeth"));
-            service.Users.Remove(admin);
+            //service.Users.Add(new User("Kate"));
+            service.AddUser(new User("Kate"));
 
-            service.Users.Sort();
-            service.Users.Reverse();
+            //service.Users.Insert(1, new User("Lilibeth"));
+
+            //service.Users.Remove(admin);
+            service.RemoveUser(admin);
+
+            //service.Users.Sort();
+            //service.Users.Reverse();
 
             foreach (var u in service)
                 Console.WriteLine(u);
