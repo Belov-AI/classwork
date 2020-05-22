@@ -31,21 +31,23 @@ namespace Users
                 CardNumber = 1234567890
             };
 
-            var service = new Service(user, admin, vip, regUser);
+            var service = new Service("log.txt", LogStream.File, 
+                user, admin, vip, regUser);
 
-            //service.Users.Add(new User("Kate"));
+            Console.ReadKey();
             service.AddUser(new User("Kate"));
 
-            //service.Users.Insert(1, new User("Lilibeth"));
-
-            //service.Users.Remove(admin);
+            Console.ReadKey();
             service.RemoveUser(admin);
 
-            //service.Users.Sort();
-            //service.Users.Reverse();
+            //foreach (var u in service)
+            //    Console.WriteLine(u);
 
-            foreach (var u in service)
-                Console.WriteLine(u);
+            //user.Log += x => Console.WriteLine(x);
+
+            //user.LogMe("Проверка события");
+
+
 
             Console.ReadKey();
         }

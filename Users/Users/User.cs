@@ -4,12 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Users
 {
     public class User : IComparable<User>
     {
         public string Login;
+
+        public event Action<string> Log;
 
         public User(string login)
         {
@@ -31,6 +34,12 @@ namespace Users
         public int CompareTo(User other)
         {
             return this.Login.CompareTo(other.Login);
+        }
+
+        public void LogMe(string message)
+        {
+            if (Log != null)
+                Log(message);
         }
     }
 
@@ -87,10 +96,25 @@ namespace Users
     public class Service : IEnumerable
     {
         private List<User> users;
+        private Logger logger;
 
-        public Service(params User[] u)
+        public Service(string logFile, LogStream stream, params User[] u)
         {
+            logger = new Logger(logFile, stream);
+            logger.Register("служба запущена");
+
             users = new List<User>(u);
+
+            foreach(var user in users)
+            {
+                user.Log += logger.Register;
+                user.LogMe($"присоединился пользователь {user.Login}");
+            }
+        }
+
+        ~Service()
+        {
+            logger.Register("служба остановлена");
         }
 
         public IEnumerator GetEnumerator()
@@ -101,11 +125,40 @@ namespace Users
         public void AddUser(User user)
         {
             users.Add(user);
+            user.Log += logger.Register;
+            user.LogMe($"присоединился пользователь {user.Login}");
         }
 
         public void RemoveUser(User user)
         {
+            user.LogMe($"отсоединился пользователь {user.Login}");
+            user.Log -= logger.Register;
             users.Remove(user);
         }
     }
+
+    public class Logger
+    {
+        private LogStream logStream;
+        private string logFileName;
+
+        public Logger(string fileName, LogStream stream)
+        {
+            logFileName = fileName;
+            logStream = stream;
+        }
+
+        public void Register(string message)
+        {
+            if (logStream == LogStream.Console)
+                Console.WriteLine($"{DateTime.Now.ToLongTimeString()} {message}");
+            else
+                using(var file = new StreamWriter(logFileName, true))
+                {
+                    file.WriteLine($"{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} {message}");
+                }
+        }
+    }
+
+    public enum LogStream { Console, File}
 }
