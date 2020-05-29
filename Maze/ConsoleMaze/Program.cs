@@ -12,6 +12,7 @@ namespace ConsoleMaze
         static void Main()
         {
             var maze = new Maze(35, 25);
+
             DisplayMaze(maze);
 
             Console.ReadKey();
