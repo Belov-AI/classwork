@@ -112,7 +112,30 @@ namespace MazeLibrary
 
             if (!start.Wall && !end.Wall && start != end)
             {
+                MakeWave(start);
 
+                var current = end;
+                path.Push(current);
+
+                do
+                {
+                    foreach(var dir in directions)
+                    {
+                        var next = Board[current.Row + dir.RawOffset,
+                            current.Column + dir.ColumnOffset];
+                        if(!next.Wall && next.Weight < current.Weight)
+                        {
+                            current = next;
+                            break;
+                        }
+;                    }
+
+                    path.Push(current);
+
+                } while (current != start);
+
+                foreach (var cell in Board)
+                    cell.Weight = int.MaxValue;
             }
 
             return path;

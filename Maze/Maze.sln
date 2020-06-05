@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maze", "Maze\Maze.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleMaze", "ConsoleMaze\ConsoleMaze.csproj", "{F615DAA2-05BA-41D6-AEA7-00E2359B9042}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrazyMaze", "CrazyMaze\CrazyMaze.csproj", "{24C5CDD8-EBCF-4F53-809A-8F0574E97942}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F615DAA2-05BA-41D6-AEA7-00E2359B9042}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F615DAA2-05BA-41D6-AEA7-00E2359B9042}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F615DAA2-05BA-41D6-AEA7-00E2359B9042}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24C5CDD8-EBCF-4F53-809A-8F0574E97942}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24C5CDD8-EBCF-4F53-809A-8F0574E97942}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24C5CDD8-EBCF-4F53-809A-8F0574E97942}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24C5CDD8-EBCF-4F53-809A-8F0574E97942}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
